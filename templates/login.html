@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="login-page">
+    <div class="container">
+      <div class="account_grid">
+        <div data-wow-delay="0.4s" class="col-md-6 login-left wow fadeInLeft">
+          <h3>NEW CUSTOMERS</h3>
+          <p>By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p><a href="register" class="acount-btn">Create an Account</a>
+        </div>
+        <div data-wow-delay="0.4s" class="col-md-6 login-right wow fadeInRight">
+          <h3>REGISTERED CUSTOMERS</h3>
+          <p>If you have an account with us, please log in.</p>
+          <form action="/login" method="POST">
+              {% csrf_token %}
+            <div><span>Login
+                <label>*</label></span>
+              <input type="text" name="username" placeholder="Login" required="" autofocus=""/>
+            </div>
+            <div><span>Password
+                <label>*</label></span>
+              <input type="password" name="password" placeholder="Password" required=""/>
+            </div>
+            <input type="submit" value="Sign In"/>
+            <div class="auth">
+                <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" class="btn btn-facebook"><i class="fa fa-facebook social-icons"> Facebook</i></a>
+                <a href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}" class="btn btn-twitter"><i class="fa fa-twitter social-icons"> Twitter</i></a>
+                <a href="{% url 'social:begin' 'vk-oauth2' %}?next={{ request.path }}" class="btn btn-vk"><i class="fa fa-vk social-icons"> VK </i></a>
+            </div>
+          </form>
+        </div>
+        <div class="clearfix">
+          <div id="message">
+            <h1 class="text-center error-message">{{ message }}</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- login-->
+{% endblock content %}

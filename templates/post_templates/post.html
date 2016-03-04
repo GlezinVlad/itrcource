@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block content %}
+{% load ratings %}
+
+<div class="content-top" ng-controller="CommentsCtrl">
+	<div class="container">
+			<div class="single">
+				<div class="col-md-8 single-top">
+					{% load static %}
+					<h1 class="img-responsive">{{post.title}}
+						{% if user.is_superuser or user == post.user%}
+						<a href='/posts/edit/{{post.id}}'><img class="edit_icon" src="{% static 'images/edit.png' %} " class="img-responsive" alt=""></a>
+						{% endif %}
+					</h1>
+                    <h5 class="sin">{{post.description}}</h5>
+                    <br/>
+                    <div class="sucss-bottom">
+                        <ul>
+                            <li><a href=""><i class="adm1"> </i>by <a href="/profile/{{post.user.username}}">{{post.user.userinfo.fullname}}</a></a></li>
+                            <li>
+                                <i class="tag"> </i>
+                                {% for tag in post.tags %}
+                                <a href="/search?q={{tag}}">{{tag}} </a>
+                                {% endfor %}
+                            </li>
+                        </ul>
+                    </div>
+                    <br/>
+
+                    {% block post_template %}
+                    {% endblock post_template %}
+					<br/>
+					{% ratings post %}
+						<div class="respon">
+
+							{% csrf_token %}
+
+							{% verbatim %}
+							<h2 ng-if="comment.length > 0" > COMMENTS: </h2>
+							<div class="strator" ng-repeat="comment in comments">
+								<div ng-if=" user.is_superuser || user.username==comment.username"class="delete-post">
+									<a ng-click="delete_comment(comment.id)"><i class="fa fa-times fa-lg"></i></a>
+								</div>
+								<h5><a href="/profile/{{comment.username}}">{{comment.fullname}}</a></h5>
+								<p>{{comment.time_published}}</p>
+									<div class="strator-left">
+										<img ng-src="{{comment.user_avatar_url}}" class="img-responsive" alt="">
+									</div>
+									<div class="strator-right">
+										<p class="sin">{{comment.text}}</p>
+									</div>
+								<div class="clearfix"></div>
+								<div class="rep">
+									<a href="#" class="reply">REPLY</a>
+								</div>
+							</div>
+							{% endverbatim %}
+
+
+							<div class="comment">
+								{% if user.is_authenticated %}
+								<h2>LEAVE A COMMENT</h2>
+								<form>
+								 <textarea ng-model="comment_text" placeholder="your comment"></textarea>
+								 <div class="smt1">
+									<input type="submit" ng-click="post_comment()">
+								 </div>
+							   </form>
+
+							{% endif %}
+							</div>
+						</div>
+				</div>
+				<div class="blog-content-right">
+                     {% include 'tag_cloud.html' %}
+                </div>
+					<div class="clearfix"> </div>
+			</div>
+	</div>
+</div>
+{% endblock content %}
+
+
+{% block page_js %}
+{% load staticfiles %}
+
+<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/comments_controller.js' %}"></script>
+{% endblock page_js %}

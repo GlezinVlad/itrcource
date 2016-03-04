@@ -1,0 +1,14 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'bower_components/bootstrap/dist/css/bootstrap.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'bower_components/components-font-awesome/css/font-awesome.min.css' %}" />
+{% if user.is_anonymous or user.userinfo.theme == 'light' %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+{% else %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/dark_style.css' %}" />
+{% endif %}
+
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{% static 'css/flexslider.css' %}" type="text/css" media="screen" />
+
+<script type="text/javascript" src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>

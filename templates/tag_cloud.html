@@ -1,0 +1,29 @@
+
+<div class="b-tag-weight">
+    <h3>Tag Cloud</h3>
+    <div id="cloud">
+    </div>
+</div>
+{% load staticfiles %}
+<script src="{% static 'bower_components/jqcloud2/dist/jqcloud.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'bower_components/jqcloud2/dist/jqcloud.min.css' %}">
+<style>
+#cloud {
+    height:300px;
+}
+</style>
+<script>
+var words = [
+    {% for tag in tags %}
+        {text: "{{tag.name}}", weight: {{tag.font_size}}, link: '/search?q={{tag.name}}'},
+    {% endfor %}
+];
+
+$( document ).ready(function() {
+    $('#cloud').jQCloud(words, {
+  autoResize: true,
+  steps: 6
+});
+});
+
+</script>

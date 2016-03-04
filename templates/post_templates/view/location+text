@@ -1,0 +1,32 @@
+{% extends "post_templates/post.html" %}
+
+{% block post_template %}
+
+<div width="500px" height="500px" style="height: 500px;" id="map"></div>
+<hr/>
+<div>{{post.text_rendered|safe}}</div>
+
+<script type="text/javascript">
+function initMap() {
+  var LatLng = {lat: {{location_lat}}, lng: {{location_lng}}};
+
+  // Create a map object and specify the DOM element for display.
+  var map = new google.maps.Map(document.getElementById('map'), {
+    center: LatLng,
+    scrollwheel: true,
+    zoom: 8
+  });
+
+  // Create a marker and set its position.
+  var marker = new google.maps.Marker({
+    map: map,
+    position: LatLng,
+    title: 'Hello!'
+  });
+}
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzVh6DYm2Hk3P6nT8I42HEW8dBxvdZZok&callback=initMap">
+</script>
+
+{% endblock post_template %}

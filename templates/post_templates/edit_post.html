@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+{% load cloudinary %}
+
+
+<div class="blog" ng-controller="EditPostCtrl">
+    <div class="container">
+        <div class="blog-content">
+        <div class="col-md-8 single-top">
+                <h4>Edit Post</h4>
+                <p></p>
+                    <div class="form_details">
+                        <form>
+                        {% csrf_token %}
+                        <label>Title:</label>
+                        <input type="text" class="text" ng-model="post.title">
+                        <label>Tags:</label>
+                        <input type="text" id="tags" class="text" name="tags" ng-model="post.tags">
+                        <label>Description:</label>
+                        <textarea ng-model="post.description" ></textarea>
+                        <label>Post Content:</label>
+                        {% block post_template %}
+                        {% endblock post_template %}
+
+                        <div class="clearfix"> </div>
+                        <div class="sub-button">
+                            {% verbatim %}
+                            <h3 class="">{{ message }}</h3>
+                            {% endverbatim %}
+                            <input type="submit" value="Save" ng-click="save()">
+                            <input type="submit" value="delete" ng-click="delete()">
+                    </div>
+                </form>
+        </div>
+    </div>
+    </div>
+        <div class="blog-content-right">
+
+            {% include 'tag_cloud.html' %}
+
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+</div>
+
+{% endblock content %}
+
+{% block page_js %}
+{% load staticfiles %}
+<script src="{% static 'js/lib/jquery.ui.widget.js' %}" type='text/javascript'></script>
+<script src="{% static 'js/lib/jquery.iframe-transport.js' %}" type='text/javascript'></script>
+<script src="{% static 'js/lib/jquery.fileupload.js' %}" type='text/javascript'></script>
+<script src="{% static 'js/lib/jquery.cloudinary.js' %}" type='text/javascript'></script>
+
+<script src="{% static 'bower_components/jquery-ui/jquery-ui.min.js' %}" type='text/javascript'></script>
+
+<script type="text/javascript" src="{% static 'js/edit_post_controller.js' %}"></script>
+{% endblock page_js %}

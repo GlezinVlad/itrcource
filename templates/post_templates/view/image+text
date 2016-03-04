@@ -1,0 +1,9 @@
+{% extends "post_templates/post.html" %}
+
+{% block post_template %}
+
+<img src="{{post.media_url}}" class="img-responsive" alt="">
+<hr/>
+<div>{{post.text_rendered|safe}}</div>
+
+{% endblock post_template %}

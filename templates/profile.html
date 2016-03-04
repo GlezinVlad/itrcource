@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="mission">
+		<div class="container">
+			<div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">User Profile</h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-3 col-lg-3 " align="center">
+                    <img alt="User Pic" src="{{profile_info.avatar_url}}" class=" img-responsive"> </div>
+
+                <div class=" col-md-9 col-lg-9 ">
+                  <table class="table table-user-information">
+                    <tbody>
+                      <tr>
+                        <td>First Name:</td>
+                        <td>{{profile_info.first_name}}</td>
+                      </tr>
+                      <tr>
+                        <td>Last Name:</td>
+                        <td>{{profile_info.last_name}}</td>
+                      </tr>
+                        <tr>
+                        <td>email</td>
+                        <td>{{profile_info.email}}</td>
+                      </tr>
+                      <tr>
+                        <td>Date of birth:</td>
+                        <td>{{ profile_info.date_of_birth|date:"d.m.Y" }}</td>
+                      </tr>
+                      <tr>
+                        <td>Shortly about:</td>
+                        <td>{{profile_info.info}}</td>
+                      </tr>
+                      <tr>
+                        <td>Interests:</td>
+                        <td>{{profile_info.interests}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+            <div class="blog">
+                <div class="blog-articals">
+                    {% include page_template %}
+                </div>
+            </div>
+	</div>
+</div>
+{% endblock content %}
+
+
+{% block page_js %}
+{% load staticfiles %}
+    <script src="{% static 'endless_pagination/js/endless-pagination.js' %}"></script>
+    <script>$.endlessPaginate({
+            paginateOnScroll: true,
+            paginateOnScrollChunkSize: 8
+        });</script>
+{% endblock page_js %}
+

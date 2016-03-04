@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+{% load cloudinary %}
+
+<div class="contact_top"  ng-controller="SettingsCtrl">
+			 		<div class="container">
+
+			 			<div class="col-md-8 contact_left" ng-app="settingsApp" ng-controller="SettingsCtrl">
+			 				<h4>Profile Settings</h4>
+			 				<p></p>
+                                {% csrf_token %}
+                                    <div class="form_details">
+					                    <input type="text" class="" ng-model="info.first_name" >
+					                    <input type="text" class="text" ng-model="info.last_name" >
+                                        <input type="date" class="my_date" ng-model="info.date_of_birth" >
+									    <input type="text" class="text" name="email" ng-model="info.email" >
+									        <textarea ng-model="info.info" name="info" ></textarea>
+									        <textarea ng-model="info.interests" name="info"></textarea>
+									    <div class="clearfix"> </div>
+                                        <div class="sub-button">
+                                            {% verbatim %}
+ 									        <h1 class="">{{ message }}</h1>
+                                            {% endverbatim %}
+									        <input type="submit" value="Save" ng-click="save()">
+                                        </div>
+						          </div>
+
+					        </div>
+					        <div class="col-md-4 contact_right">
+                                <div>
+                                    {% verbatim %}
+                                    <img class="img-responsive" ng-src="{{info.avatar_url}}" />
+                                    {% endverbatim %}
+                                </div>
+                                <h4 id="refresh" class="preview">Drop file to upload new avatar</h4>
+                                <form enctype="multipart/form-data">
+                                    <span class="btn btn-default btn-file">
+                                        {% cloudinary_direct_upload_field request=request %}
+                                    </span>
+
+
+                                </form>
+                                <label>Choose language:
+                                    <select id="language" class="form-control" ng-model="info.language" >
+                                        <option value="English">English</option>
+									    <option value="Russian">Русский</option>
+                                    </select>
+                                </label>
+                                <div>
+                                    <label>Choose color theme:
+                                        <select id="theme" class="form-control" ng-model="info.theme" >
+                                            <option value="light">Light</option>
+                                            <option value="dark" >Dark</option>
+                                        </select>
+                                    </label>
+                                </div>
+					        </div>
+						</div>
+					</div>
+
+
+{% endblock content %}
+
+{% block page_js %}
+{% load staticfiles %}
+<script src="{% static 'js/lib/jquery.ui.widget.js' %}" type='text/javascript'></script>
+<script src="{% static 'js/lib/jquery.iframe-transport.js' %}" type='text/javascript'></script>
+<script src="{% static 'js/lib/jquery.fileupload.js' %}" type='text/javascript'></script>
+<script src="{% static 'js/lib/jquery.cloudinary.js' %}" type='text/javascript'></script>
+<script type="text/javascript" src="{% static 'js/settings_controller.js' %}"></script>
+{% endblock page_js %}

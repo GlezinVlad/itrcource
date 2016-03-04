@@ -1,0 +1,8 @@
+{% extends "post_templates/post.html" %}
+
+{% block post_template %}
+<iframe  width="100%" height="500px" src="{{post.media_url}}" allowfullscreen="true"></iframe>
+<hr/>
+<div>{{post.text_rendered|safe}}</div>
+
+{% endblock post_template %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+{% load endless %}
+<div class="blog">
+    <div class="container">
+        <div class="blog-content">
+            <div class="blog-content-left">
+                <div class="blog-articals">
+                    <a class="btn-my" href="/">Posts order by date</a><hr/>
+                    {% include page_template %}
+                </div>
+            </div>
+            <div class="blog-content-right">
+
+            {% include 'tag_cloud.html' %}
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block page_js %}
+{% load staticfiles %}
+    <script src="{% static 'endless_pagination/js/endless-pagination.js' %}"></script>
+    <script>$.endlessPaginate({
+            paginateOnScroll: true,
+            paginateOnScrollChunkSize: 8
+        });</script>
+{% endblock page_js %}
+

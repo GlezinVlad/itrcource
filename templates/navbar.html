@@ -1,0 +1,79 @@
+{% if user.is_anonymous or user.userinfo.language == 'English' %}
+<div class="header">
+    <div class="header-bottom">
+      <div class="container">
+        <div class="logo"><a class="img-responsive" href="/"><h1 class="img-responsive">Itrcource</h1></a></div>
+        <div class="head-nav"><span class="menu"></span>
+          <ul class="cl-effect-3">
+            <li><a href="/">Feed</a></li>
+            <li><a href="/search">Search</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="/posts/create/choose_template">Create Post</a></li>
+            {% endif %}
+            <div class="clearfix"></div>
+          </ul>
+          <!-- script-for-nav-->
+          <script>
+            $( "span.menu" ).click(function() {
+              $( ".head-nav ul" ).slideToggle(300, function() {
+                // Animation complete.
+              });
+            });
+          </script>
+          <!-- script-for-nav-->
+        </div>
+        <div class="header-right1">
+          {% if user.is_authenticated %}
+          <li><a href="/profile/{{ user.username }}">{{ user.username }}</a></li>
+          <li><a href="/settings">Settings</a></li>
+          <li><a href="/logout">Logout</a></li>
+          {% else %}
+          <li><a href="/login">Login</a></li>
+          <li><a href="/register">Register</a></li>
+          {% endif %}
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+{% else %}
+
+<div class="header">
+    <div class="header-bottom">
+      <div class="container">
+        <div class="logo"><a class="img-responsive" href="/"><h1 class="img-responsive">Itrcource</h1></a></div>
+        <div class="head-nav"><span class="menu"></span>
+          <ul class="cl-effect-3">
+            <li><a href="/">Новости</a></li>
+            <li><a href="/search">Поиск</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="/posts/create/choose_template">Создать статью</a></li>
+            {% endif %}
+            <div class="clearfix"></div>
+          </ul>
+          <!-- script-for-nav-->
+          <script>
+            $( "span.menu" ).click(function() {
+              $( ".head-nav ul" ).slideToggle(300, function() {
+                // Animation complete.
+              });
+            });
+          </script>
+          <!-- script-for-nav-->
+        </div>
+        <div class="header-right1">
+          {% if user.is_authenticated %}
+          <li><a href="/profile/{{ user.username }}">{{ user.username }}</a></li>
+          <li><a href="/settings">Настройки</a></li>
+          <li><a href="/logout">Выйти</a></li>
+          {% else %}
+          <li><a href="/login">Войти</a></li>
+          <li><a href="/register">Зарегистрироваться</a></li>
+          {% endif %}
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+
+{% endif %}

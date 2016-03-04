@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div id="templates" class="recnt">
+      <div class="container">
+        <h3>Publication templates</h3>
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            {% for template_name in template_list%}
+          <div class="air">
+            <li class="wb-dis">
+              <h4>{{template_name}}</h4>
+            </li>
+            <li class="b-tn">
+              <div class="apply_btn">
+                <form action="/posts/create/{{template_name}}">
+                  <input type="submit" value="Choose Template"/>
+                </form>
+              </div>
+            </li>
+            <div class="clearfix"></div>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="col-md-3"></div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+
+{% endblock content %}

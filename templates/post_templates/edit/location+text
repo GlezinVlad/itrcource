@@ -1,0 +1,9 @@
+{% extends "post_templates/edit_post.html" %}
+
+{% block post_template %}
+
+ <label>Location format: (lat/lng):</label>
+<input type="text" class="text" name="tags" ng-model="post.media_url">
+<textarea ng-model="post.text" id="post_textatea"></textarea>
+
+{% endblock post_template %}

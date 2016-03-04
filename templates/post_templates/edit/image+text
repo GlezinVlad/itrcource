@@ -1,0 +1,18 @@
+{% extends "post_templates/edit_post.html" %}
+{% load cloudinary %}
+
+{% block post_template %}
+<div>
+    {% verbatim %}
+    <img class="img-responsive" ng-src="{{post.media_url}}" width="400" height="400" />
+    {% endverbatim %}
+</div>
+<h4 id="refresh" class="preview">Drop file to upload image</h4>
+<form enctype="multipart/form-data">
+    <span class="btn btn-default btn-file">
+        {% cloudinary_direct_upload_field request=request %}
+    </span>
+</form>
+<textarea ng-model="post.text" id="post_textatea"></textarea>
+
+{% endblock post_template %}
